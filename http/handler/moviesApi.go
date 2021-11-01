@@ -16,7 +16,7 @@ type MoviesApiServer struct {
 	proto.UnimplementedMoviesApiServer
 }
 
-func (c *MoviesApiServer) GetMovies(ctx context.Context, req *proto.GetMoviesRequest) (*proto.MoviesResponse, error) {
+func (c MoviesApiServer) GetMovies(ctx context.Context, req *proto.GetMoviesRequest) (*proto.MoviesResponse, error) {
 	url := fmt.Sprintf("%s?apikey=%s&s=%s&page=%d", viper.GetString(config.OmdbURL), viper.GetString(config.OmdbKey), req.Searchword, req.Page)
 
 	response := proto.MoviesResponse{}
@@ -29,7 +29,7 @@ func (c *MoviesApiServer) GetMovies(ctx context.Context, req *proto.GetMoviesReq
 	return &response, nil
 }
 
-func (c *MoviesApiServer) GetMovieByID(ctx context.Context, req *proto.GetMovieByIDRequest) (*proto.MovieByIDResponse, error) {
+func (c MoviesApiServer) GetMovieByID(ctx context.Context, req *proto.GetMovieByIDRequest) (*proto.MovieByIDResponse, error) {
 	url := fmt.Sprintf("%s?apikey=%s&i=%s", viper.GetString(config.OmdbURL), viper.GetString(config.OmdbKey), req.Id)
 
 	response := proto.MovieByIDResponse{}
