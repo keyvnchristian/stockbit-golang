@@ -42,23 +42,6 @@ func (c *MoviesApiServer) GetMovieByID(ctx context.Context, req *proto.GetMovieB
 	return &response, nil
 }
 
-// func getMovies(url string) {
-// 	req, _ := http.NewRequest("GET", url, nil)
-// 	res, _ := http.DefaultClient.Do(req)
-
-// 	defer res.Body.Close()
-
-// 	var v interface{}
-// 	decoder := json.NewDecoder(res.Body)
-
-// 	err := decoder.Decode(&v)
-// 	if err != nil {
-// 		log.Printf("%v", err)
-// 	}
-
-// 	fmt.Println(v)
-// }
-
 func getJson(url string, target interface{}) error {
 	req, _ := http.NewRequest("GET", url, nil)
 	res, _ := http.DefaultClient.Do(req)
