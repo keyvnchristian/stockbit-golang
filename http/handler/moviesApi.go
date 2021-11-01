@@ -17,8 +17,6 @@ type MoviesApiServer struct {
 }
 
 func (c *MoviesApiServer) GetMovies(ctx context.Context, req *proto.GetMoviesRequest) (*proto.MoviesResponse, error) {
-	
-
 	url := fmt.Sprintf("%s?apikey=%s&s=%s&page=%d", viper.GetString(config.OmdbURL), viper.GetString(config.OmdbKey), req.Searchword, req.Page)
 
 	response := proto.MoviesResponse{}
@@ -67,7 +65,6 @@ func getJson(url string, target interface{}) error {
 	
 	defer res.Body.Close()
 
-	fmt.Println(url)
 	decoder := json.NewDecoder(res.Body)
 
 	err := decoder.Decode(target)

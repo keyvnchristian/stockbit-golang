@@ -8,3 +8,12 @@ create:
 
 clean:
 	rm gen/proto/*.go
+
+test:
+	go test -v ./...
+
+run:
+	go run main.go
+
+client:
+	go run client/client.go

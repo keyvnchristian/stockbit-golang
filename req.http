@@ -1,0 +1,9 @@
+//Get Movies
+GET http://localhost:8083/v1/movies?searchword=Batman&page=1 HTTP/1.1
+content-type: application/json
+
+###
+
+//Get Movie Detail
+GET http://localhost:8083/v1/movies/tt0372784 HTTP/1.1
+content-type: application/json
