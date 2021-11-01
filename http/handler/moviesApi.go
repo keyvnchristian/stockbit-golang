@@ -20,7 +20,7 @@ func (c *MoviesApiServer) GetMovies(ctx context.Context, req *proto.GetMoviesReq
 	url := fmt.Sprintf("%s?apikey=%s&s=%s&page=%d", viper.GetString(config.OmdbURL), viper.GetString(config.OmdbKey), req.Searchword, req.Page)
 
 	response := proto.MoviesResponse{}
-	err := getJson(url, &response)
+	err := getResponseFromURL(url, &response)
 	if err != nil {
 		log.Printf("%v", err)
 		return nil, err
@@ -33,7 +33,7 @@ func (c *MoviesApiServer) GetMovieByID(ctx context.Context, req *proto.GetMovieB
 	url := fmt.Sprintf("%s?apikey=%s&i=%s", viper.GetString(config.OmdbURL), viper.GetString(config.OmdbKey), req.Id)
 
 	response := proto.MovieByIDResponse{}
-	err := getJson(url, &response)
+	err := getResponseFromURL(url, &response)
 	if err != nil {
 		log.Printf("%v", err)
 		return nil, err
@@ -42,7 +42,7 @@ func (c *MoviesApiServer) GetMovieByID(ctx context.Context, req *proto.GetMovieB
 	return &response, nil
 }
 
-func getJson(url string, target interface{}) error {
+func getResponseFromURL(url string, target interface{}) error {
 	req, _ := http.NewRequest("GET", url, nil)
 	res, _ := http.DefaultClient.Do(req)
 	
@@ -55,5 +55,5 @@ func getJson(url string, target interface{}) error {
 		return err
 	}
 
-    return err
+    return nil
 }
